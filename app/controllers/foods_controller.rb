@@ -3,12 +3,12 @@ class FoodsController < ApplicationController
   def index
     @foods = Food.order(created_at: :desc).limit(5)
   end
-    
-  def new 
+
+  def new
     @food = Food.new
     @params = params
   end
-    
+
   def create
     @food = current_user.foods.new(food_params)
     if @food.save
@@ -19,18 +19,17 @@ class FoodsController < ApplicationController
       render :new
     end
   end
-    
-    def destroy
-      @food = Food.find(params[:id])
-      @food.destroy
-      flash[:notice] = 'Food deleted successfully'
-      redirect_to request.path
-    end
-    
-    private 
-    
-    def food_params
-      params.require(:food).permit(:name, :measurement_unit, :price)
-    end
-end
 
+  def destroy
+    @food = Food.find(params[:id])
+    @food.destroy
+    flash[:notice] = 'Food deleted successfully'
+    redirect_to request.path
+  end
+
+  private
+
+  def food_params
+    params.require(:food).permit(:name, :measurement_unit, :price)
+  end
+end
