@@ -1,9 +1,12 @@
 class FoodsController < ApplicationController
   load_and_authorize_resource
   def index
-    @foods = Food.order(created_at: :desc).limit(5)
+    @foods = Food.order(created_at: :desc)
   end
 
+  def show
+    @food = Food.find(params[:id])
+  end
   def new
     @food = Food.new
     @params = params
@@ -24,7 +27,7 @@ class FoodsController < ApplicationController
     @food = Food.find(params[:id])
     @food.destroy
     flash[:notice] = 'Food deleted successfully'
-    redirect_to request.path
+    redirect_to user_foods_path
   end
 
   private
