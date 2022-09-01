@@ -27,3 +27,13 @@
   font-weight: 800;
   text-align: center;
 }
+
+.recipe-container {
+  box-shadow: rgba(50, 50, 90, 0.25) 0 30px 60px -15px, rgba(0, 0, 0, 0.5) 0 20px 35px -20px;
+  border-radius: 8px 8px;
+}
+
+.recipe-item {
+  border-radius: 8px 8px;
+  border: 1px solid #ccc;
+}
