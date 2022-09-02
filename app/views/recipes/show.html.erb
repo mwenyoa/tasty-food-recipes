@@ -19,7 +19,7 @@
         </div>
         <div class="row d-flex justify-content-between">
           <button class="col-md-2 btn btn-secondary btn-sm m-4">Generate Shopping List</button>
-          <button class="col-md-2 btn btn-secondary btn-sm m-4">Add Ingredients</button>
+          <button type="button" class="col-md-2 btn btn-secondary btn-sm m-4" data-bs-toggle="modal" data-bs-target="#addIngredient">Add Ingredients</button>
         </div>
 
         <hr>
@@ -40,4 +40,30 @@
           </tbody>
         </table>
     </div>
+</div>
+
+<div class="modal fade" id="addIngredient" tabindex="-1" aria-labelledby="addingredient" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addIngredient">Add Food to <%= @recipe.name %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: [@recipe, @recipe.recipe_foods.build] do |f| %>
+          <%= f.select :food_id, current_user.foods.collect {|food| [food.id, food.name]}, class:"form-select", id:"foodSelect" %>
+          <label for="foodSelect" class="label">
+
+          <%= f.number_field :quantity, class:"form-control" %>
+          <label for="foodSelect" class="label">
+
+          <%= f.submut "Add food", class:"btn btn-sucess" %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
