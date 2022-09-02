@@ -28,12 +28,24 @@
   text-align: center;
 }
 
-.recipe-container {
-  box-shadow: rgba(50, 50, 90, 0.25) 0 30px 60px -15px, rgba(0, 0, 0, 0.5) 0 20px 35px -20px;
-  border-radius: 8px 8px;
+.recipe-container,
+.table-foods {
+  box-shadow: rgb(50 50 90 / 25%) 0 30px 60px -15px, rgb(0 0 0 / 50%) 0 20px 35px -20px;
+  border-radius: 8px;
 }
 
 .recipe-item {
-  border-radius: 8px 8px;
+  border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+header {
+  box-shadow: rgb(114 114 214 / 25%) 0 30px 60px -15px, rgb(0 0 0 / 50%) 0 20px 35px -20px;
+}
+
+header ul li {
+  display: flex;
+  margin-left: 30px;
+  font-weight: bold;
+  font-size: 1.5rem;
 }

@@ -33,7 +33,20 @@ class RecipesController < ApplicationController
     redirect_to user_recipes_path
   end
 
-  # def public_recipes; end
+  def public_recipes
+    @public_recipes = Recipe.includes(:user, :foods,
+                                      :recipe_foods).where(public: true).order(created_at: :desc).map do |recipe|
+      {
+        id: recipe.id,
+        name: recipe.name,
+        description: recipe.description,
+        author: recipe.user.name,
+        created_at: recipe.created_at,
+        items: recipe.total_count,
+        total_price: recipe.foods.map(&:price).sum
+      }
+    end
+  end
 
   def toggle_public
     @recipe = Recipe.find(params[:id])

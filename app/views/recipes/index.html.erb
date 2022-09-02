@@ -9,7 +9,7 @@
             <% @recipes.each_with_index do |recipe, index| %>
             <div class="recipe-item m-2 d-flex justify-content-start">
               <div class="col-md-3 p-2 my-2">
-                <h3><%= link_to recipe.name, recipe_path(recipe.id) %></h3>
+                <h5><%= link_to recipe.name, recipe_path(recipe.id) %></h5>
                   <% if can? :manage, recipe %>
                   <%= button_to "Remove", user_recipe_path(recipe.user_id, recipe.id), data: {turbo:false}, method: :delete, class: 'btn btn-danger btn-sm mt-4'%>
                   <% end %>

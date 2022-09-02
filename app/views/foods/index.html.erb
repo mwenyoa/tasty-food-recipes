@@ -3,12 +3,12 @@
         <div class="col-12">
             <h2 class="d-flex justify-content-center text-primary">List of  foods</h2>
             <h3 class="d-flex justify-content-end">
-             <%= link_to "Add Food", new_user_food_path(current_user.id) %></h3>
+             <%= link_to "Add Food", new_user_food_path(current_user.id), class: 'btn btn-primary'%></h3>
         </div>
         <div class="col-12">
-            <table class="table  table-hover table-bordered table-striped  table-responsive">
+            <table class="table  table-hover table-bordered table-striped  table-responsive table-foods">
                 <thead>
-                  <tr class="bg-info">
+                  <tr class="bg-secondary text-white">
                     <th scope="col">#</th>
                     <th scope="col">Food name</th>
                     <th scope="col">Measurement unit</th>
