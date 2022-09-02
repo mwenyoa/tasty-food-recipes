@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'recipe_foods/create'
+  get 'recipe_foods/new'
+  get 'recipe_foods/edit'
   devise_for :user
   root 'recipes#public_recipes'
   resources :users, only: [:index, :show] do
