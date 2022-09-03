@@ -1,0 +1,28 @@
+<div class="container">
+  <h3 class="text-center mt-4">Shopping list</h3>
+  <div class="row d-flex justify-content-between">
+    <h5 class="col-md-4">Amount of foods to buy: <%= @filter_food.count %></h5>
+    <h5 class="col-md-4">Total value of of food needed: $<%= @total %></h5>
+  </div>
+  <br>
+  <table class="table table-ligth table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th> 
+        <th scope="col">Unit Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @filter_food.each_with_index do |food, index|%>
+      <tr>
+        <th scope="row"><%= index+1 %></th>
+        <td><%= food.name %></td>
+        <td><%= food.measurement_unit %></td>
+        <td>$<%= food.price %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
