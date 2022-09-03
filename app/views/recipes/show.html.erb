@@ -25,18 +25,27 @@
         <hr>
         <table class="table striped table-hover">
           <thead>
+            <th>No.</th>
             <th>Food</th>
             <th>Quantity</th>
             <th>Value</th>
             <th>Actions</th>
           </thead>
           <tbody>
+          <% @recipe.recipe_foods.each_with_index do |ingredient, index|%>
             <tr>
-              <td>Rice</td>
-              <td>10 kg</td>
-              <td>K100</td>
-              <td></td>
+              <td><%= index+1 %></td>
+              <td><%= ingredient.food.name %></td>
+              <td><%= ingredient.quantity %></td>
+              <td>$ <%= ingredient.food.price %></td>
+              <% if can? :manage, @recipe %>
+                <td>
+                  <%= link_to "Edit", edit_recipe_recipe_food_path(@recipe, ingredient), class:"btn btn-sm btn-primary" if can? :manage, @recipe%>
+                  <%= link_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, class:"btn btn-sm btn-danger" if can? :manage, @recipe %>
+                  </td>
+              <% end %>
             </tr>
+            <% end %>
           </tbody>
         </table>
     </div>
@@ -46,23 +55,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addIngredient">Add Food to <%= @recipe.name %></h5>
+        <h5 class="modal-title" id="addIngredient">Add Ingredient to <%= @recipe.name %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with model: [@recipe, @recipe.recipe_foods.build] do |f| %>
-          <%= f.select :food_id, current_user.foods.collect {|food| [food.id, food.name]}, class:"form-select", id:"foodSelect" %>
-          <label for="foodSelect" class="label">
-
-          <%= f.number_field :quantity, class:"form-control" %>
-          <label for="foodSelect" class="label">
-
-          <%= f.submut "Add food", class:"btn btn-sucess" %>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <%= render "recipe_foods/new" %>
       </div>
     </div>
   </div>
