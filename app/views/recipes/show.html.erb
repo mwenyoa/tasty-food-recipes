@@ -41,9 +41,9 @@
               <td><%= ingredient.quantity %></td>
               <td>$ <%= ingredient.food.price %></td>
               <% if can? :manage, @recipe %>
-                <td>
+                <td class="d-flex">
                   <%= link_to "Edit", edit_recipe_recipe_food_path(@recipe, ingredient), class:"btn btn-sm btn-primary" if can? :manage, @recipe %>
-                  <%= link_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, data: {turbo: false}, class:"btn btn-sm btn-danger" if can? :manage, @recipe %>
+                  <%= button_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, data: {turbo: false}, class:"btn btn-sm btn-danger mx-2" if can? :manage, @recipe %>
                 </td>
               <% end %>
             </tr>
