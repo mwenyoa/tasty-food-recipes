@@ -18,8 +18,10 @@
           <p><h4>Steps:</h4> <%= @recipe.description %></p>
         </div>
         <div class="row d-flex justify-content-between">
-          <button class="col-md-2 btn btn-secondary btn-sm m-4">Generate Shopping List</button>
-          <button type="button" class="col-md-2 btn btn-secondary btn-sm m-4" data-bs-toggle="modal" data-bs-target="#addIngredient">Add Ingredients</button>
+          <%= link_to "Generate Shopping List", shopping_list_path(@recipe), class:"col-md-2 btn btn-secondary btn-sm m-4" %>
+          <% if can? :manage, @recipe %>
+            <button type="button" class="col-md-2 btn btn-secondary btn-sm m-4" data-bs-toggle="modal" data-bs-target="#addIngredient">Add Ingredients</button>
+          <% end %>
         </div>
 
         <hr>
@@ -32,7 +34,7 @@
             <th>Actions</th>
           </thead>
           <tbody>
-          <% @recipe.recipe_foods.each_with_index do |ingredient, index|%>
+          <% @recipe.recipe_foods.each_with_index do |ingredient, index| %>
             <tr>
               <td><%= index+1 %></td>
               <td><%= ingredient.food.name %></td>
@@ -40,9 +42,9 @@
               <td>$ <%= ingredient.food.price %></td>
               <% if can? :manage, @recipe %>
                 <td>
-                  <%= link_to "Edit", edit_recipe_recipe_food_path(@recipe, ingredient), class:"btn btn-sm btn-primary" if can? :manage, @recipe%>
-                  <%= link_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, class:"btn btn-sm btn-danger" if can? :manage, @recipe %>
-                  </td>
+                  <%= link_to "Edit", edit_recipe_recipe_food_path(@recipe, ingredient), class:"btn btn-sm btn-primary" if can? :manage, @recipe %>
+                  <%= link_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, data: {turbo: false}, class:"btn btn-sm btn-danger" if can? :manage, @recipe %>
+                </td>
               <% end %>
             </tr>
             <% end %>
