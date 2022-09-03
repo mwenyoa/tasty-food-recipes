@@ -1,0 +1,68 @@
+<div class='container'>
+    <div class="recipe-container row d-flex justify-content-center p-4 m-4">
+        <div class="col-12">
+            <h2 class="d-flex justify-content-center text-primary"><%= @recipe.name %></h2>
+            <h5 class="d-flex justify-content-end">
+              <% if can? :manage, @recipe %>
+                <% if @recipe.public %>
+                  <%= button_to "Public", update_recipe_path(@recipe), method: :patch, class:"btn btn-success btn-sm" %>
+                <% else %>
+                  <%= button_to "Private", update_recipe_path(@recipe), method: :patch, class:"btn btn-secondary btn-sm" %>
+                <% end %>
+              <% end %>
+            </h5>
+            <h5 class="d-flex justify-content-start">Preparation time: <%= @recipe.preparation_time %></h5>
+            <h5 class="d-flex justify-content-start">Cooking time: <%= @recipe.cooking_time %></h5>
+        </div>
+        <div class="col-md-8 p-2 my-2">
+          <p><h4>Steps:</h4> <%= @recipe.description %></p>
+        </div>
+        <div class="row d-flex justify-content-between">
+          <%= link_to "Generate Shopping List", shopping_list_path(@recipe), class:"col-md-2 btn btn-secondary btn-sm m-4" %>
+          <% if can? :manage, @recipe %>
+            <button type="button" class="col-md-2 btn btn-secondary btn-sm m-4" data-bs-toggle="modal" data-bs-target="#addIngredient">Add Ingredients</button>
+          <% end %>
+        </div>
+
+        <hr>
+        <table class="table striped table-hover">
+          <thead>
+            <th>No.</th>
+            <th>Food</th>
+            <th>Quantity</th>
+            <th>Value</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+          <% @recipe.recipe_foods.each_with_index do |ingredient, index| %>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%= ingredient.food.name %></td>
+              <td><%= ingredient.quantity %></td>
+              <td>$ <%= ingredient.food.price %></td>
+              <% if can? :manage, @recipe %>
+                <td class="d-flex">
+                  <%= link_to "Edit", edit_recipe_recipe_food_path(@recipe, ingredient), class:"btn btn-sm btn-primary" if can? :manage, @recipe %>
+                  <%= button_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, data: {turbo: false}, class:"btn btn-sm btn-danger mx-2" if can? :manage, @recipe %>
+                </td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addIngredient" tabindex="-1" aria-labelledby="addingredient" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addIngredient">Add Ingredient to <%= @recipe.name %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "recipe_foods/new" %>
+      </div>
+    </div>
+  </div>
+</div>

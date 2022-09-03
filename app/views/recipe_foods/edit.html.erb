@@ -1,0 +1,13 @@
+<div class="container">
+  <h2 class="text-center">Edit Ingredient</h2>
+  <div class="d-flex justify-content-center mt-4" style="width: 60vw; margin:auto">
+      <%= form_with  model: @recipe_food, url: { action: "update"}, local: true, class:"input-form"  do |f|%>
+          <div class="form-group">
+              <%= f.select :food_id, current_user.foods.collect {|food| [food.name, food.id]},{ include_blank: true} , class:"custom-select form-control", id:"inputGroupSelect01" %><br>
+              <%= f.number_field :quantity ,  class:"form-control" , required: true, placeholder: 'Quantity',  min: 1 %><br>
+          </div>
+          <%= link_to "Go back", recipe_path(@recipe_food.recipe.id), class:"btn btn-secondary btn-sm" %> <%= f.submit "Update", class:"btn btn-sm btn-primary" %>
+      <% end %>
+      <br /> 
+  </div>
+</div>

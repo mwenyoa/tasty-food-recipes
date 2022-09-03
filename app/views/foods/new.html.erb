@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 m-auto">
+            <h3 class="d-flex justify-content-center text-primary">Add new food Item</h3>
+         <div class="card  bg-light">
+                <%=  form_for @food, url:user_foods_path, local: true, data: {turbo:false}, class: 'm-' do |f| %>
+                <%= f.text_field :name, placeholder:"Food name", class:"form_control p-2  m-4"  %>
+                <%= f.text_field :measurement_unit, placeholder:"measurement unit", class:"form_control  p-2 m-4" %>
+                <%= f.text_field :price, placeholder:"Food price", class:"form_control  p-2  m-4"%>
+                <%= f.submit "Save Food", class: "btn btn-primary btn-md   p-2  m-4" %>
+                <% end %> 
+         </div>
+        </div>
+    </div>
+</div>

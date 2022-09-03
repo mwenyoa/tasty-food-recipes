@@ -1,0 +1,26 @@
+<div class='container'>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            <h2 class="d-flex justify-content-center text-primary">Public Recipes</h2>
+        </div>
+          <div class="recipe-container row p-4">
+            <% @recipes.each do |recipe| %>
+            <div class="recipe-item m-2 d-flex justify-content-start">
+              <div class="col-md-10 p-2 my-2">
+                <div class="list-group d-column justify-content-start">
+                    <h5 class="mb-0"><%=link_to recipe[:name], user_recipe_path(current_user.id, recipe[:id]) %></h5>
+                    <small class="opacity-30 text-nowrap"><em>by <%= recipe[:author]  %></small></em>
+                    <p class="mb-0 opacity-50"><%= recipe[:description].truncate(120)%></p>
+                   </div>
+              </div>
+              <div class="col-md-2 p-2 my-2">
+                <div class=" list-group d-column justify-content-end">
+                    <h6 class="text-secondary"><%= recipe[:items] %> Foods</h6>
+                    <h6>Total Price: $<%= recipe[:total_price] %> </h6>
+                 </div>
+              </div>
+            </div>
+            <% end%>
+          </div>
+    </div>
+</div>

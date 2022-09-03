@@ -1,0 +1,51 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.notice {
+  color: rgb(5 131 5);
+  font-weight: 800;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.alert {
+  margin-top: 10px;
+  color: rgb(233 24 10 / 87.7%);
+  font-weight: 800;
+  text-align: center;
+}
+
+.recipe-container,
+.table-foods {
+  box-shadow: rgb(50 50 90 / 25%) 0 30px 60px -15px, rgb(0 0 0 / 50%) 0 20px 35px -20px;
+  border-radius: 8px;
+}
+
+.recipe-item {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+header {
+  box-shadow: rgb(114 114 214 / 25%) 0 30px 60px -15px, rgb(0 0 0 / 50%) 0 20px 35px -20px;
+}
+
+header ul li {
+  display: flex;
+  margin-left: 30px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
