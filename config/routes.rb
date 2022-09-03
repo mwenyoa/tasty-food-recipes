@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   resources :recipes, only: [:index, :show]
 
+  resources :recipes do
+    resources :recipe_foods, only: [:create, :new, :edit, :update, :destroy]
+  end
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
