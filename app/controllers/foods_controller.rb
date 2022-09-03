@@ -1,7 +1,7 @@
 class FoodsController < ApplicationController
   load_and_authorize_resource
   def index
-    @foods = Food.order(created_at: :desc)
+    @foods = Food.includes(:user).order(created_at: :desc)
   end
 
   def show
