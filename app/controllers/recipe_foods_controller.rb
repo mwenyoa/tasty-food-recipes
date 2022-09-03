@@ -29,6 +29,12 @@ class RecipeFoodsController < ApplicationController
     end
   end
 
+  def shopping_list
+    foods = Food.includes(:recipes).where(user: current_user)
+    @filter_food = foods.filter { |food| food.recipes.blank? }
+    @total = @filter_food.sum(&:price)
+  end
+
   private
 
   def recipe_food_params
