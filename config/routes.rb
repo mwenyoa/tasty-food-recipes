@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   get '/public_recipes', to: 'recipes#public_recipes', as: :public_recipes
   get '/shopping_list/:recipe_id', to: 'recipe_foods#shopping_list', as: :shopping_list
 
-  resources :recipes, only: [:index, :show]
+  # resources :recipes, only: [:index, :show]
 
-  resources :recipes do
+  resources :recipes, only: [:index, :show, :destroy] do
     resources :recipe_foods, only: [:create, :new, :edit, :update, :destroy]
   end
 
