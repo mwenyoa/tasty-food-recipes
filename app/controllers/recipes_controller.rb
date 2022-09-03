@@ -2,12 +2,11 @@ class RecipesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @recipes = Recipe.order(created_at: :desc)
+    @recipes = current_user.recipes.includes(:user, :recipe_foods).order(created_at: :desc)
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
-    @foods = Food.order(created_at: :desc)
+    @recipe = Recipe.includes(:recipe_foods).find(params[:id])
   end
 
   def new
@@ -34,15 +33,15 @@ class RecipesController < ApplicationController
   end
 
   def public_recipes
-    @public_recipes = Recipe.includes(:user, :foods,
-                                      :recipe_foods).where(public: true).order(created_at: :desc).map do |recipe|
+    @recipes = Recipe.includes(:user, :foods,
+                               :recipe_foods).where(public: true).order(created_at: :desc).map do |recipe|
       {
         id: recipe.id,
         name: recipe.name,
         description: recipe.description,
         author: recipe.user.name,
         created_at: recipe.created_at,
-        items: recipe.total_count,
+        items: recipe.recipe_foods_count,
         total_price: recipe.foods.map(&:price).sum
       }
     end
