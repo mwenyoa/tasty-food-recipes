@@ -1,6 +1,6 @@
 <%= form_with model: [@recipe, @recipe.recipe_foods.build], local: true do |f| %>
   <%= f.label :Ingredient, class:"form-label" %>
-  <%= f.select :food_id, current_user.foods.collect {|food| [food.name, food.id]}, {include_blank: true}, class:"form-select", id:"foodSelect" %>
+  <%= f.select :food_id, current_user.foods.collect {|food| [food.name, food.id]}, {include_blank: true, }, class:"form-select", id:"foodSelect" %>
   <br>
   <%= f.label :quantity, class:"form-label" %>
   <%= f.number_field :quantity, class:"form-control", required: true, placeholder: '1',  min: 1 %>

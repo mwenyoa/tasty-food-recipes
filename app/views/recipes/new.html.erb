@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12">
+    <div class="row text-center my-auto">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 m-auto">
             <h3 class="d-flex justify-content-center text-primary">Add new Recipe item</h3>
-         <div class="card bg-light p-4">
+         <div class="card bg-light p-4  m-auto">
                 <%= form_for @recipe, url: user_recipes_path, local: true, data: {turbo:false} do |f| %>
                   <%= f.text_field :name, placeholder:"Recipe name", class:"form-control p-2 mt-2"  %>
                   <%= f.text_field :preparation_time, placeholder:"Preparation time", class:"form-control p-2 mt-2" %>
@@ -14,4 +14,3 @@
         </div>
     </div>
 </div>
-<%# Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni alias saepe pariatur a fugit vitae. %>
